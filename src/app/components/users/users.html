@@ -1,0 +1,143 @@
+<main class="users-page">
+
+  <header class="page-header">
+
+    <div>
+      <span class="page-label">USER MANAGEMENT</span>
+
+      <h1>Users</h1>
+
+      <p>
+        Manage teachers, students, parents and administrators.
+      </p>
+    </div>
+
+    <button
+     routerLink="/users/add"
+      type="button"
+      class="add-user-button"
+      (click)="openAddUser()"
+    >
+      <span>+</span>
+      Add User
+    </button>
+
+  </header>
+
+
+  <section class="user-stats">
+
+    <article class="stat-card">
+      <span>Students</span>
+      <strong>0</strong>
+    </article>
+
+    <article class="stat-card">
+      <span>Teachers</span>
+      <strong>0</strong>
+    </article>
+
+    <article class="stat-card">
+      <span>Parents</span>
+      <strong>0</strong>
+    </article>
+
+    <article class="stat-card">
+      <span>Administrators</span>
+      <strong>1</strong>
+    </article>
+
+  </section>
+
+
+  <section class="users-panel">
+
+    <div class="panel-header">
+
+      <div>
+        <span class="panel-label">ALL USERS</span>
+        <h2>School Users</h2>
+      </div>
+
+      <input
+        type="text"
+        placeholder="Search users..."
+        class="search-input"
+      >
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+      <table>
+
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+
+        <tbody>
+
+          <tr>
+
+            <td>
+
+              <div class="user-name">
+
+                <div class="avatar">
+                  S
+                </div>
+
+                <span>
+                  System Administrator
+                </span>
+
+              </div>
+
+            </td>
+
+            <td>
+              admin@school.com
+            </td>
+
+            <td>
+              <span class="role admin">
+                ADMIN
+              </span>
+            </td>
+
+            <td>
+              <span class="status active">
+                Active
+              </span>
+            </td>
+
+            <td>
+              <button
+                type="button"
+                class="action-button"
+              >
+                Edit
+              </button>
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+    

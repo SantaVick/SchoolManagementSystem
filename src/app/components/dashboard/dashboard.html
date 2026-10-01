@@ -1,0 +1,518 @@
+<main class="dashboard-scene">
+
+  <!-- Background effects -->
+  <div class="background-glow"></div>
+
+  <div class="bubbles" aria-hidden="true">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+
+  <div class="dashboard-layout">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+      <div class="brand">
+
+        <div class="brand-icon">
+          S
+        </div>
+
+        <div>
+          <strong>School</strong>
+          <span>Management</span>
+        </div>
+
+      </div>
+
+
+      <nav class="navigation">
+
+        <p class="nav-label">
+          MAIN MENU
+        </p>
+
+        <a
+          href="/dashboard"
+          class="nav-item active"
+        >
+          <span class="nav-icon">⌂</span>
+          <span>Dashboard</span>
+        </a>
+
+
+        <<a
+  routerLink="/users"
+  class="nav-item"
+>
+  <span class="nav-icon">♙</span>
+  <span>Users</span>
+</a>
+
+
+        <a
+          href="#"
+          class="nav-item"
+        >
+          <span class="nav-icon">♙</span>
+          <span>Teachers</span>
+        </a>
+
+
+        <a
+          href="#"
+          class="nav-item"
+        >
+          <span class="nav-icon">♧</span>
+          <span>Parents</span>
+        </a>
+
+
+        <a
+          href="#"
+          class="nav-item"
+        >
+          <span class="nav-icon">▦</span>
+          <span>Classes</span>
+        </a>
+
+
+        <p class="nav-label secondary">
+          SYSTEM
+        </p>
+
+
+        <a
+          href="#"
+          class="nav-item"
+        >
+          <span class="nav-icon">⚙</span>
+          <span>Settings</span>
+        </a>
+
+      </nav>
+
+
+      <div class="sidebar-bottom">
+
+        <div class="user-mini">
+
+          <div class="avatar">
+            {{ user()?.name?.charAt(0) || 'A' }}
+          </div>
+
+          <div class="user-mini-info">
+
+            <strong>
+              {{ user()?.name || 'Administrator' }}
+            </strong>
+
+            <span>
+              {{ user()?.role || 'ADMIN' }}
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="logout-button"
+          (click)="logout()"
+        >
+          <span>↪</span>
+          Logout
+        </button>
+
+      </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <section class="main-content">
+
+
+      <!-- Header -->
+
+      <header class="topbar">
+
+        <div class="mobile-brand">
+          <div class="brand-icon">
+            S
+          </div>
+
+          <strong>
+            School Management
+          </strong>
+        </div>
+
+
+        <div class="topbar-user">
+
+          <div class="topbar-user-text">
+
+            <strong>
+              {{ user()?.name || 'Administrator' }}
+            </strong>
+
+            <span>
+              {{ user()?.email || '' }}
+            </span>
+
+          </div>
+
+
+          <div class="avatar large">
+            {{ user()?.name?.charAt(0) || 'A' }}
+          </div>
+
+        </div>
+
+      </header>
+
+
+      <!-- Welcome -->
+
+      <section class="welcome">
+
+        <div>
+
+          <span class="welcome-label">
+            ADMIN DASHBOARD
+          </span>
+
+          <h1>
+            Welcome back,
+            <span>
+              {{ user()?.name || 'Administrator' }}
+            </span>
+          </h1>
+
+          <p>
+            Here's what's happening across your school today.
+          </p>
+
+        </div>
+
+
+        <div class="date-card">
+
+          <span>Today</span>
+
+          <strong>
+            School Overview
+          </strong>
+
+        </div>
+
+      </section>
+
+
+      <!-- Statistics -->
+
+      @if (loading()) {
+
+        <section class="loading-card">
+
+          <div class="spinner"></div>
+
+          <p>
+            Loading school statistics...
+          </p>
+
+        </section>
+
+      } @else {
+
+        <section class="stats-grid">
+
+
+          <!-- Students -->
+
+          <article class="stat-card">
+
+            <div class="stat-top">
+
+              <div class="stat-icon students">
+                ♙
+              </div>
+
+              <span class="stat-status">
+                Active
+              </span>
+
+            </div>
+
+            <div class="stat-info">
+
+              <span>
+                Total Students
+              </span>
+
+              <strong>
+                {{ stats().students }}
+              </strong>
+
+            </div>
+
+            <div class="stat-footer">
+              Registered students
+            </div>
+
+          </article>
+
+
+          <!-- Teachers -->
+
+          <article class="stat-card">
+
+            <div class="stat-top">
+
+              <div class="stat-icon teachers">
+                ♙
+              </div>
+
+              <span class="stat-status">
+                Active
+              </span>
+
+            </div>
+
+            <div class="stat-info">
+
+              <span>
+                Total Teachers
+              </span>
+
+              <strong>
+                {{ stats().teachers }}
+              </strong>
+
+            </div>
+
+            <div class="stat-footer">
+              Teaching staff
+            </div>
+
+          </article>
+
+
+          <!-- Parents -->
+
+          <article class="stat-card">
+
+            <div class="stat-top">
+
+              <div class="stat-icon parents">
+                ♧
+              </div>
+
+              <span class="stat-status">
+                Active
+              </span>
+
+            </div>
+
+            <div class="stat-info">
+
+              <span>
+                Total Parents
+              </span>
+
+              <strong>
+                {{ stats().parents }}
+              </strong>
+
+            </div>
+
+            <div class="stat-footer">
+              Registered guardians
+            </div>
+
+          </article>
+
+
+          <!-- Classes -->
+
+          <article class="stat-card">
+
+            <div class="stat-top">
+
+              <div class="stat-icon classes">
+                ▦
+              </div>
+
+              <span class="stat-status">
+                Active
+              </span>
+
+            </div>
+
+            <div class="stat-info">
+
+              <span>
+                Total Classes
+              </span>
+
+              <strong>
+                {{ stats().classes }}
+              </strong>
+
+            </div>
+
+            <div class="stat-footer">
+              School classes
+            </div>
+
+          </article>
+
+        </section>
+
+      }
+
+
+      <!-- Bottom section -->
+
+      <section class="dashboard-grid">
+
+
+        <article class="glass-panel">
+
+          <div class="panel-header">
+
+            <div>
+              <span class="panel-label">
+                QUICK ACCESS
+              </span>
+
+              <h2>
+                School Management
+              </h2>
+            </div>
+
+          </div>
+
+
+          <div class="quick-actions">
+
+            <button class="quick-action">
+              <span class="quick-icon">♙</span>
+
+              <span>
+                <strong>Students</strong>
+                <small>Manage students</small>
+              </span>
+
+              <span class="arrow">→</span>
+            </button>
+
+
+            <button class="quick-action">
+              <span class="quick-icon">♙</span>
+
+              <span>
+                <strong>Teachers</strong>
+                <small>Manage teachers</small>
+              </span>
+
+              <span class="arrow">→</span>
+            </button>
+
+
+            <button class="quick-action">
+              <span class="quick-icon">▦</span>
+
+              <span>
+                <strong>Classes</strong>
+                <small>Manage classes</small>
+              </span>
+
+              <span class="arrow">→</span>
+            </button>
+
+          </div>
+
+        </article>
+
+
+        <article class="glass-panel overview-panel">
+
+          <div class="panel-header">
+
+            <div>
+              <span class="panel-label">
+                SYSTEM STATUS
+              </span>
+
+              <h2>
+                Everything is running
+              </h2>
+            </div>
+
+            <span class="status-dot"></span>
+
+          </div>
+
+
+          <div class="system-status">
+
+            <div class="status-row">
+
+              <span>
+                Authentication
+              </span>
+
+              <strong>
+                Connected
+              </strong>
+
+            </div>
+
+
+            <div class="status-row">
+
+              <span>
+                Database
+              </span>
+
+              <strong>
+                Connected
+              </strong>
+
+            </div>
+
+
+            <div class="status-row">
+
+              <span>
+                Admin access
+              </span>
+
+              <strong>
+                Authorized
+              </strong>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      </section>
+
+
+    </section>
+
+  </div>
+
+</main>

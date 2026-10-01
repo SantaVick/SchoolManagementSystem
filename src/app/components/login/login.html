@@ -1,0 +1,172 @@
+<main class="scene">
+  <section class="water-card" aria-labelledby="login-title">
+
+    <!-- Decorative water layers -->
+    <div class="shine" aria-hidden="true"></div>
+
+    <div class="bubbles" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="waves" aria-hidden="true">
+      <svg
+        class="wave wave-back"
+        viewBox="0 0 1200 120"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M0 60 C150 100 350 20 600 60 C850 100 1050 20 1200 60 V120 H0 Z"
+        />
+      </svg>
+
+      <svg
+        class="wave wave-front"
+        viewBox="0 0 1200 120"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M0 70 C200 30 400 110 600 70 C800 30 1000 110 1200 70 V120 H0 Z"
+        />
+      </svg>
+    </div>
+
+    <div class="content">
+
+      <!-- Header -->
+      <header class="card-header">
+        <h1 id="login-title">Welcome back</h1>
+        <p>Sign in to pick up where you left off.</p>
+      </header>
+
+      <!-- Login Form -->
+      <form
+        [formGroup]="form"
+        (ngSubmit)="submit()"
+        novalidate
+      >
+
+        <!-- Email -->
+        <div class="field">
+          <label for="email">Email</label>
+
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            autocomplete="email"
+            placeholder="you@example.com"
+            [attr.aria-invalid]="email.invalid && email.touched"
+          />
+
+          @if (email.touched && email.invalid) {
+            <span
+              class="field-error"
+              role="alert"
+            >
+              {{
+                email.hasError('required')
+                  ? 'Enter your email address.'
+                  : 'Enter a valid email address.'
+              }}
+            </span>
+          }
+        </div>
+
+        <!-- Password -->
+        <div class="field">
+          <label for="password">Password</label>
+
+          <div class="input-wrap">
+
+            <input
+              id="password"
+              [type]="showPassword() ? 'text' : 'password'"
+              formControlName="password"
+              autocomplete="current-password"
+              placeholder="At least 8 characters"
+              [attr.aria-invalid]="password.invalid && password.touched"
+            />
+
+            <button
+              type="button"
+              class="toggle"
+              (click)="togglePassword()"
+              [attr.aria-label]="
+                showPassword()
+                  ? 'Hide password'
+                  : 'Show password'
+              "
+              [attr.aria-pressed]="showPassword()"
+            >
+              {{ showPassword() ? 'Hide' : 'Show' }}
+            </button>
+
+          </div>
+
+          @if (password.touched && password.invalid) {
+            <span
+              class="field-error"
+              role="alert"
+            >
+              {{
+                password.hasError('required')
+                  ? 'Enter your password.'
+                  : 'Password must be at least 8 characters.'
+              }}
+            </span>
+          }
+        </div>
+
+        <!-- Remember me / Forgot password -->
+        <div class="row">
+
+          <label class="check">
+            <input
+              type="checkbox"
+              formControlName="remember"
+            />
+
+            <span>Keep me signed in</span>
+          </label>
+
+          <a
+            href="#"
+            class="link"
+          >
+            Forgot password?
+          </a>
+
+        </div>
+
+        <!-- Backend error -->
+        @if (errorMessage()) {
+          <p
+            class="form-error"
+            role="alert"
+          >
+            {{ errorMessage() }}
+          </p>
+        }
+
+        <!-- Sign in button -->
+        <button
+          type="submit"
+          class="login-button"
+          [disabled]="loading()"
+        >
+          @if (loading()) {
+            Signing in...
+          } @else {
+            Sign in
+          }
+        </button>
+
+      </form>
+
+    </div>
+  </section>
+</main>
